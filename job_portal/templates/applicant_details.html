@@ -1,0 +1,115 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contact_active %}active{% endblock %}
+{% block title %}Applicant Details{% endblock %}
+
+{% block body %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+
+
+</style>
+
+
+
+
+
+        <!-- Contact Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <h4 class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                            Applicants Detals : {{Job_Apply_get.Job_Seeker.user.first_name}} {{Job_Apply_get.Job_Seeker.user.last_name}}<br>
+                            <span class="badge bg-secondary text-center">{{Job_Apply_get.Apply_Time}}</span>
+                        </h4>
+
+                    </div>
+                </div>
+
+
+                <div class="row g-4">
+
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="card card-body">
+                            <a class="btn btn-warning" href="{% url 'applicants' Job_Apply_get.id %}"> &#8592; Back</a>
+                            <hr>
+                            <h3 style="text-align: center">Profile Settings</h3>
+                            <hr>
+                            <img src="{% if Job_Apply_get.Job_Seeker.Your_image %}{{Job_Apply_get.Job_Seeker.Your_image.url}}{% else %}{% static 'img/user_img.png' %}{% endif %}" class="rounded profile-pic" alt="user">
+                            <h5 class="container text-center"><b>{{Job_Apply_get.Job_Seeker.user.first_name}} {{Job_Apply_get.Job_Seeker.user.last_name}}</b></h5>
+
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="wow fadeInUp" data-wow-delay="0.5s">
+                                <table class="table table-bordered">
+                                  <tbody>
+                                    <tr>
+                                      <td>Name :</td>
+                                      <td>{{Job_Apply_get.Name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Email:</td>
+                                      <td>{{Job_Apply_get.Email}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Portfolio website:</td>
+                                      <td>{{Job_Apply_get.Portfolio_website}}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>File: </td>
+                                      <td>{% if Job_Apply_get.Attach_File %}<a class="btn btn-info" href="{{ Job_Apply_get.Attach_File.url }}" target="_blank">See File</a> {% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Cover Letter: </td>
+                                      <td>{{Job_Apply_get.Cover_Letter}}</td>
+                                    </tr>
+
+
+                                    <tr>
+                                      <td>Age: </td>
+                                      <td>{% if Job_Apply_get.Job_Seeker.Age %}{{Job_Apply_get.Job_Seeker.Age}}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Skill: </td>
+                                      <td>{% if Job_Apply_get.Job_Seeker.Skill %}{{Job_Apply_get.Job_Seeker.Skill | safe }}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Qualification: </td>
+                                      <td>{% if Job_Apply_get.Job_Seeker.Qualification %}{{Job_Apply_get.Job_Seeker.Qualification | safe }}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Resume: </td>
+                                      <td>{% if Job_Apply_get.Job_Seeker.Resume %}<a class="btn btn-info" href="{{get_talents.Resume.url}}" target="_blank">See Resume</a> {% else %}None{% endif %}</td>
+                                    </tr>
+
+                                  </tbody>
+                                </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+
+
+{% endblock %}

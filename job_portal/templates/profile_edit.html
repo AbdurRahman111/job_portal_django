@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contact_active %}active{% endblock %}
+{% block title %}My Profile{% endblock %}
+
+{% block body %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+
+
+
+
+
+        <!-- Contact Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">My Profile</h1>
+                <div class="row g-4">
+
+                    <div class="col-md-3 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="card card-body">
+                            <a class="btn btn-warning" href="{% url 'my_profile' %}"> &#8592; Back to Profile</a>
+
+                            <hr>
+                            <img src="{% if get_job_provider_profile.company_logo %}{{get_job_provider_profile.company_logo.url}}{% else %}{% static 'img/user_img.png' %}{% endif %}" class="rounded profile-pic" alt="user">
+                            <h5 class="container text-center"><b></b></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="card card-body">
+                                <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data">{% csrf_token %}
+                            <table class="table container">
+                                    {{ form.media }}
+                                    {{ form | crispy }}
+
+
+                            </table>
+                                    <button class="btn btn-success">Save</button>
+                                </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+
+
+{% endblock %}

@@ -1,0 +1,113 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block account_active %}active{% endblock %}
+{% block title %}Account{% endblock %}
+
+{% block body %}
+
+
+
+
+
+        <!-- Contact Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Login/Register</h1>
+
+
+                <div class="row g-4">
+
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="wow fadeInUp" data-wow-delay="0.5s">
+                            <p style="color:red">{{erorr_message_2}}</p>
+                            <form method="POST" action="{% url 'login_func' %}">{% csrf_token %}
+                                <div class="row g-3">
+
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input name="log_email" type="email" class="form-control" placeholder="Email">
+                                            <label>Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="password" name="log_password" class="form-control" placeholder="Password">
+                                            <label>Password</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="wow fadeInUp" data-wow-delay="0.5s">
+                            <p style="color:red">{{erorr_message}}</p>
+                            <form action="{% url 'my_account' %}" method="POST">{% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                                            <label >First Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                                            <label >Last Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="email" name="email_sign" class="form-control" placeholder="Email">
+                                            <label>Email</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="password" name="pass_sign" class="form-control" placeholder="Password">
+                                            <label>Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="password" name="re_pass_sign" class="form-control" placeholder="Re-type Password">
+                                            <label>Re-type Password</label>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                    <label for="exampleFormControlSelect1">User Type</label>
+                                    <select class="form-control" name="user_type" id="exampleFormControlSelect1">
+                                      <option value="Job Seeker">Job Seeker</option>
+                                      <option value="Job Provider">Job Provider</option>
+                                    </select>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">SignUp</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+
+
+{% endblock %}

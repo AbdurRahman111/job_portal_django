@@ -1,0 +1,125 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contact_active %}active{% endblock %}
+{% block title %}My Profile{% endblock %}
+
+{% block body %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+
+
+</style>
+
+
+
+
+
+        <!-- Contact Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">My Profile</h1>
+                <div class="row g-4">
+
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="card card-body">
+                            <a class="btn btn-warning" href="{% url 'index' %}"> &#8592; Back to Home</a>
+                            <hr>
+                            <h3 style="text-align: center">Profile Settings</h3>
+                            <hr>
+                            <img src="{% if gt_job_provider_profile.company_logo %}{{gt_job_provider_profile.company_logo.url}}{% elif gt_job_seeker_profile.Your_image %}{{gt_job_seeker_profile.Your_image.url}}{% else %}{% static 'img/user_img.png' %}{% endif %}" class="rounded profile-pic" alt="user">
+                            <h5 class="container text-center"><b>{{request.user.first_name}} {{request.user.last_name}}</b></h5>
+                            {% if request.user.user_type != "Admin" %}
+                            <a href="{% url 'edit_profile' %}" class="btn btn-danger">Edit Profile</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="wow fadeInUp" data-wow-delay="0.5s">
+                                <table class="table table-bordered">
+                                  <tbody>
+                                    <tr>
+                                      <td>User Type :</td>
+                                      <td>{{request.user.user_type}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>First Name:</td>
+                                      <td>{{request.user.first_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Last Name:</td>
+                                      <td>{{request.user.last_name}}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Email: </td>
+                                      <td>{{request.user.email}}</td>
+                                    </tr>
+
+                                    {% if request.user.user_type == "Job Provider" %}
+                                    <tr>
+                                      <td>Company Name: </td>
+                                      <td>{% if gt_job_provider_profile.company_name %}{{gt_job_provider_profile.company_name}}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Company Website: </td>
+                                      <td>{% if gt_job_provider_profile.company_website %}{{gt_job_provider_profile.company_website}}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Company Email: </td>
+                                      <td>{% if gt_job_provider_profile.company_email %}{{gt_job_provider_profile.company_email}}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Company Description: </td>
+                                      <td>{% if gt_job_provider_profile.About_company %}{{gt_job_provider_profile.About_company}}{% else %}None{% endif %}</td>
+                                    </tr>
+                                    {% endif %}
+
+
+                                  {% if request.user.user_type == "Job Seeker" %}
+                                    <tr>
+                                      <td>Age: </td>
+                                      <td>{% if gt_job_seeker_profile.Age %}{{gt_job_seeker_profile.Age}}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Skill: </td>
+                                      <td>{% if gt_job_seeker_profile.Skill %}{{gt_job_seeker_profile.Skill | safe }}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Qualification: </td>
+                                      <td>{% if gt_job_seeker_profile.Qualification %}{{gt_job_seeker_profile.Qualification | safe }}{% else %}None{% endif %}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Resume: </td>
+                                      <td>{% if gt_job_seeker_profile.Resume %}<a class="btn btn-info" href="{{gt_job_seeker_profile.Resume.url}}" target="_blank">See Resume</a> {% else %}None{% endif %}</td>
+                                    </tr>
+                                    {% endif %}
+
+                                  </tbody>
+                                </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+
+
+{% endblock %}
